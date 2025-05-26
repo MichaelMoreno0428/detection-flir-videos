@@ -28,19 +28,18 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 🚀 Ejecutar localmente
-bash
-Copy
-Edit
+```bash
 uvicorn app.main:app \
   --host 0.0.0.0 \
   --port 8000 \
   --workers 4
 Abre en tu navegador:
 
-arduino
-Copy
-Edit
+
+```bash
 http://localhost:8000/
+
+
 🔌 Endpoints disponibles
 1. /predict
 Método: POST
@@ -55,17 +54,13 @@ threshold (form-data, opcional): umbral de confianza (0.0–1.0), defecto 0.5.
 
 Ejemplo:
 
-bash
-Copy
-Edit
+```bash
 curl -X POST "http://35.247.251.247:8000/predict" \
   -F file=@imagen.jpg \
   -F threshold=0.6
 Respuesta:
 
-json
-Copy
-Edit
+```json
 {
   "detections": [
     {"label": 0, "score": 0.82, "box": [x1, y1, x2, y2]},
@@ -85,9 +80,7 @@ threshold (form-data, opcional): umbral de confianza.
 
 Ejemplo:
 
-bash
-Copy
-Edit
+``` bash
 curl -X POST "http://35.247.251.247:8000/predict/image" \
   -F file=@imagen.jpg \
   -F threshold=0.6 \
