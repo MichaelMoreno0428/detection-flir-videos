@@ -4,8 +4,10 @@ jinja2
 python-multipart
 aiofiles
 torch
-transformers
 Pillow
 matplotlib
 opencv-python
 torchvision
+safetensors>=0.3.1
+transformers>=4.35.0
+
