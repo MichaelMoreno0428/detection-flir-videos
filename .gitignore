@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+test/
 # Distribution / packaging
 .Python
 build/
@@ -177,8 +177,5 @@ __pycache__/
 *.py[cod]
 .env
 # Modelos y datos
-model/
-*.safetensors
-*.bin
 # Entornos virtuales
 venv/
