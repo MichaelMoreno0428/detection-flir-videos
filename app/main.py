@@ -23,7 +23,13 @@ async def root(request: Request):
 # Cargar modelo RT-DETR fine-tuned
 model_path = "model"
 processor = AutoProcessor.from_pretrained(model_path, trust_remote_code=True, use_fast=True)
-model = AutoModelForObjectDetection.from_pretrained(model_path, trust_remote_code=True)
+# Después: forzar a partir del binario PyTorch en lugar de safetensors
+model = AutoModelForObjectDetection.from_pretrained(
+    model_path,
+    trust_remote_code=True,
+    from_pt=True
+)
+
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 model.to(device)
