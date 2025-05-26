@@ -1,0 +1,26 @@
+# cloudbuild.yaml
+
+steps:
+  # 1. Instala git-lfs y descarga los archivos LFS
+  - name: 'alpine/git'
+    entrypoint: /bin/sh
+    args:
+      - '-c'
+      - |
+        apk update && apk add --no-cache git-lfs \
+        && git lfs install \
+        && git lfs pull
+
+  # 2. Construye la imagen Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '--no-cache',
+        '-t', 'gcr.io/${PROJECT_ID}/detection-flir-videos',
+        '.'
+      ]
+
+# Lista de imágenes que se empujarán automáticamente a Container Registry
+images:
+  - 'gcr.io/${PROJECT_ID}/detection-flir-videos'
