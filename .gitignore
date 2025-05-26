@@ -172,3 +172,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+# Python
+__pycache__/
+*.py[cod]
+.env
+# Modelos y datos
+model/
+*.safetensors
+*.bin
+# Entornos virtuales
+venv/

@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+aiofiles
+torch
+transformers
+Pillow
+matplotlib
+opencv-python

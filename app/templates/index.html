@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detección FLIR</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Detección de Objetos en Vídeo Termal</h1>
+    <form action="/predict/" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept="image/*" required />
+      <label for="threshold">Umbral de confianza:</label>
+      <input type="number" name="threshold" min="0" max="1" step="0.05" value="0.5" />
+      <button type="submit">Analizar</button>
+    </form>
+
+    {% if result_img %}
+      <h2>Resultado para: {{ filename }}</h2>
+      <img src="data:image/png;base64,{{ result_img }}" alt="Resultado" />
+    {% endif %}
+  </div>
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
