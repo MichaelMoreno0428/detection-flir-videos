@@ -1,11 +1,15 @@
 # Detección de Objetos en Vídeo Termal (FLIR)
 
-**Repositorio:** https://github.com/MichaelMoreno0428/detection-flir-videos
+**Repositorio:** [https://github.com/MichaelMoreno0428/detection-flir-videos](https://github.com/MichaelMoreno0428/detection-flir-videos)
 
-Este proyecto ofrece una **API en FastAPI** y una **interfaz web** para inferir dos modelos de detección de objetos sobre imágenes termales:
+---
 
-- **RT-DETR**: Transformer RT-DETR R50  
-- **YOLOv8** (Ultralytics): YOLO optimizado para detección en tiempo real
+## 🎯 Modelos disponibles
+
+| Modelo  | Descripción                      | Carpeta en `model/`         |
+|:-------:|:---------------------------------|:----------------------------|
+| RT-DETR | Transformer RT-DETR R50          | `model/pytorch_model.bin`   |
+| YOLOv8  | Ultralytics YOLOv8 (`best.pt`)   | `model/yolo/best.pt`        |
 
 ---
 
@@ -15,7 +19,7 @@ Este proyecto ofrece una **API en FastAPI** y una **interfaz web** para inferir 
 git clone https://github.com/MichaelMoreno0428/detection-flir-videos.git
 cd detection-flir-videos
 
-# Inicializa y descarga modelos con Git LFS
+# Inicializa Git LFS y descarga pesos grandes
 git lfs install
 git lfs pull
 
@@ -23,79 +27,68 @@ git lfs pull
 python3 -m venv venv
 source venv/bin/activate
 
-# Instala dependencias
+# Instala dependencias Python
 pip install --upgrade pip
 pip install -r requirements.txt
 
 🚀 Ejecutar localmente
-```bash
 uvicorn app.main:app \
   --host 0.0.0.0 \
   --port 8000 \
   --workers 4
+
 Abre en tu navegador:
 
+Local: http://localhost:8000/
 
-```bash
-http://localhost:8000/
+Remoto (VM): http://35.247.251.247:8000/
 
 
 🔌 Endpoints disponibles
-1. /predict
-Método: POST
+1. POST /predict
+Envía una imagen y recibe un JSON con las detecciones de ambos modelos.
 
-Descripción: Recibe una imagen y devuelve JSON con las detecciones.
+Form-data
 
-Parámetros:
+file (archivo de imagen)
 
-file (form-data): archivo de imagen.
+threshold (opcional, 0.0–1.0, defecto 0.5)
 
-threshold (form-data, opcional): umbral de confianza (0.0–1.0), defecto 0.5.
-
-Ejemplo:
-
-```bash
 curl -X POST "http://35.247.251.247:8000/predict" \
   -F file=@imagen.jpg \
   -F threshold=0.6
-Respuesta:
-
-```json
-{
+Respuesta de ejemplo:
+ {
   "detections": [
-    {"label": 0, "score": 0.82, "box": [x1, y1, x2, y2]},
-    {"label": 1, "score": 0.75, "box": [x1, y1, x2, y2]}
+    { "label": 0, "score": 0.82, "box": [x1, y1, x2, y2] },
+    { "label": 1, "score": 0.75, "box": [x1, y1, x2, y2] }
   ]
 }
-2. /predict/image
-Método: POST
 
-Descripción: Recibe una imagen y devuelve la misma con cajas dibujadas.
+2. POST /predict/image
+Envía una imagen y recibe la misma con las cajas dibujadas.
 
-Parámetros:
+Form-data
 
-file (form-data): archivo de imagen.
+file (archivo de imagen)
 
-threshold (form-data, opcional): umbral de confianza.
-
-Ejemplo:
-
-``` bash
+threshold (opcional)
 curl -X POST "http://35.247.251.247:8000/predict/image" \
   -F file=@imagen.jpg \
   -F threshold=0.6 \
   --output salida.jpg
-Resultado: se descarga salida.jpg con las detecciones anotadas.
 
-🎯 Modelos disponibles
-Modelo	Descripción	Carpeta en model/
-RT-DETR	Transformer RT-DETR R50	model/pytorch_model.bin
-YOLOv8	Ultralytics YOLOv8 (best.pt)	model/yolo/best.pt
+Se descargará salida.jpg con las detecciones anotadas.
 
-📝 Uso rápido
-Levanta el servidor con Uvicorn.
+📝 Resumen rápido
+Clona el repo y descarga los pesos con Git LFS.
 
-Accede a la interfaz web en http://<TU_IP_O_LOCAL>:8000/.
+Crea/activa tu entorno virtual e instala dependencias.
 
-Prueba los endpoints desde la UI o con curl.
+Ejecuta el servidor con Uvicorn en 0.0.0.0:8000.
+
+Accede a la UI en / o prueba los endpoints con curl.
+
+
+
 
