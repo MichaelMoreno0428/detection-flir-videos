@@ -1,21 +1,19 @@
-# Dockerfile
 FROM python:3.10-slim
 
-# Variables de entorno
-ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+# Instala librerías del sistema que requiere OpenCV
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Copia y deps
+# Copia e instala dependencias Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia el código
+# Copia código
 COPY . .
 
-# Exponer puerto
 EXPOSE 8000
-
-# Comando de arranque
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

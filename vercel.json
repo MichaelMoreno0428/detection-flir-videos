@@ -1,12 +1,19 @@
 {
-  "functions": {
-    "api/*.py": {
-      "runtime": "python3.10"
-    }
-  },
-  "routes": [
-    { "src": "/", "dest": "/public/index.html" },
-    { "src": "/predict", "dest": "/api/predict.py" },
-    { "src": "/predict/image", "dest": "/api/predict_image.py" }
-  ]
+"version": 2,
+"builds": \[
+{
+"src": "api/*.py",
+"use": "@vercel/python",
+"config": { "maxLambdaSize": "50mb" }
+},
+{
+"src": "app/static/\*\*/*",
+"use": "@vercel/static"
+}
+],
+"routes": \[
+{ "src": "/predict", "dest": "/api/predict.py" },
+{ "src": "/predict/image", "dest": "/api/predict\_image.py" },
+{ "src": "/(.\*)", "dest": "/app/templates/index.html" }
+]
 }
