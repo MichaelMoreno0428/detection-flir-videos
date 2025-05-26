@@ -27,7 +27,16 @@ processor = AutoProcessor.from_pretrained(model_path, trust_remote_code=True, us
 model = AutoModelForObjectDetection.from_pretrained(
     model_path,
     trust_remote_code=True,
-    from_pt=True
+)
+
+
+# Carga del processor (igual que antes)
+processor = AutoProcessor.from_pretrained(model_path, trust_remote_code=True, use_fast=True)
+
+# Carga del modelo SIN from_pt ni flags extra
+model = AutoModelForObjectDetection.from_pretrained(
+    model_path,
+    trust_remote_code=True
 )
 
 

@@ -118,7 +118,7 @@
   "num_queries": 300,
   "positional_encoding_temperature": 10000,
   "torch_dtype": "float32",
-  "transformers_version": "4.51.3",
+  "transformers_version": "4.52.3",
   "use_focal_loss": true,
   "use_pretrained_backbone": false,
   "use_timm_backbone": false,

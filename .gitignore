@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-test/
+
 # Distribution / packaging
 .Python
 build/
@@ -25,7 +25,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
+test/*
+RT_DeTR_flir.ipynb
+rtdetr_api.py
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -177,5 +179,8 @@ __pycache__/
 *.py[cod]
 .env
 # Modelos y datos
+model/
+*.safetensors
+*.bin
 # Entornos virtuales
 venv/
