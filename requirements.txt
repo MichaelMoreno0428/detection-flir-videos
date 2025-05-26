@@ -3,11 +3,12 @@ uvicorn
 jinja2
 python-multipart
 aiofiles
-torch
 Pillow
 matplotlib
 opencv-python
-torchvision
 safetensors>=0.3.1
 transformers>=4.35.0
+torch==2.5.1
+torchvision==0.16.3
+
 
